@@ -1,4 +1,5 @@
 import { usePokemonContext } from "../Context/PokemonProvider";
+import Button from "./Button";
 import Loader from "./Loader";
 import styles from "./PokemonList.module.css";
 
@@ -17,8 +18,7 @@ function PokemonList() {
               <div className={styles.selectPokemon}></div>
               <div className={styles.container}>
                 <p className={styles.pokemonName}>{pokemon.name}</p>
-                <button
-                  className={styles.btn}
+                <Button
                   onClick={() =>
                     dispatch({
                       type: "getDetailsPokemon",
@@ -27,26 +27,24 @@ function PokemonList() {
                   }
                 >
                   Ver mais
-                </button>
+                </Button>
               </div>
             </li>
           ))}
       </ul>
       <div className={styles.pagination}>
-        <button
-          className={styles.btn}
+        <Button
           onClick={() => dispatch({ type: "getPreviousPage" })}
           disabled={previousPage === null}
         >
           Página Anterior
-        </button>
-        <button
-          className={styles.btn}
+        </Button>
+        <Button
           onClick={() => dispatch({ type: "getNextPage" })}
           disabled={nextPage === null}
         >
           Próxima Página
-        </button>
+        </Button>
       </div>
     </section>
   );

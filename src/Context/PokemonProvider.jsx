@@ -40,6 +40,13 @@ function reducer(state, action) {
       return { ...state, currentPage: state.nextPage };
     case "getPreviousPage":
       return { ...state, currentPage: state.previousPage };
+    case "closeDetails":
+      return {
+        ...state,
+        pokemon: null,
+        pokemonUrl: null,
+        isLoadingDetails: false,
+      };
     default:
       return state;
   }

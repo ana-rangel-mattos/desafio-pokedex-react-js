@@ -1,0 +1,10 @@
+.fields {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  width: 60%;
+}
+
+.fields > p {
+  font-size: 1.25rem;
+}
