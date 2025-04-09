@@ -6,9 +6,13 @@ const initialState = {
   queryType: "Number",
   query: "",
   pokemons: [],
-  pokemonUrl: "",
+  pokemon: null,
+  pokemonUrl: null,
   isLoading: true,
-  nextPage: "",
+  isLoadingDetails: false,
+  nextPage: null,
+  currentPage: "https://pokeapi.co/api/v2/pokemon/?offset=0&limit=20",
+  previousPage: null,
 };
 
 function reducer(state, action) {
@@ -25,34 +29,72 @@ function reducer(state, action) {
         ...state,
         pokemons: action.payload.results,
         nextPage: action.payload.next,
+        previousPage: action.payload.previous,
         isLoading: false,
       };
     case "getDetailsPokemon":
-      return { ...state, pokemonUrl: action.payload };
+      return { ...state, pokemonUrl: action.payload, isLoadingDetails: true };
+    case "showDetailsPokemon":
+      return { ...state, pokemon: action.payload, isLoadingDetails: false };
+    case "getNextPage":
+      return { ...state, currentPage: state.nextPage };
+    case "getPreviousPage":
+      return { ...state, currentPage: state.previousPage };
+    default:
+      return state;
   }
 }
 
 export function PokemonProvider({ children }) {
-  const [{ queryType, query, pokemons, isLoading }, dispatch] = useReducer(
-    reducer,
-    initialState
-  );
+  const [
+    {
+      queryType,
+      query,
+      pokemons,
+      isLoading,
+      nextPage,
+      currentPage,
+      previousPage,
+      pokemon,
+      pokemonUrl,
+      isLoadingDetails,
+    },
+    dispatch,
+  ] = useReducer(reducer, initialState);
 
   useEffect(() => {
     async function handlePokemons() {
       try {
-        const res = await fetch(`https://pokeapi.co/api/v2/pokemon/?limit=20`);
+        const res = await fetch(`${currentPage}`);
         const data = await res.json();
         dispatch({
           type: "dataReceived",
-          payload: { results: data.results, next: data.next },
+          payload: {
+            results: data.results,
+            next: data.next,
+            previous: data.previous,
+          },
         });
       } catch (error) {
         throw new Error(error.message);
       }
     }
     handlePokemons();
-  }, []);
+  }, [currentPage]);
+
+  useEffect(() => {
+    async function getDetailsPokemon() {
+      if (!pokemonUrl) return;
+      try {
+        const res = await fetch(`${pokemonUrl}`);
+        const data = await res.json();
+        dispatch({ type: "showDetailsPokemon", payload: data });
+      } catch (error) {
+        throw new Error(error.message);
+      }
+    }
+    getDetailsPokemon();
+  }, [pokemonUrl]);
 
   const sharedStates = {
     query,
@@ -60,6 +102,11 @@ export function PokemonProvider({ children }) {
     dispatch,
     pokemons,
     isLoading,
+    isLoadingDetails,
+    pokemon,
+    pokemonUrl,
+    nextPage,
+    previousPage,
   };
 
   return (
