@@ -1,0 +1,42 @@
+.header {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  padding: 10px 150px;
+  background-color: rgb(45, 101, 214);
+  border: 2px solid rgb(202, 208, 37);
+}
+
+.logo {
+  max-width: 250px;
+}
+
+.searchInput {
+  min-width: 310px;
+  padding: 15px 20px;
+  border-radius: 22px;
+  outline: none;
+
+  font-size: 1rem;
+  font-weight: bold;
+  text-align: center;
+
+  color: rgb(202, 208, 37);
+  background-color: rgb(32, 44, 176);
+  border: 2px solid rgb(202, 208, 37);
+}
+
+.searchInput::placeholder {
+  color: rgb(202, 208, 37);
+  font-size: 1rem;
+  text-align: center;
+}
+
+.toogleQueryType {
+  padding: 10px 15px;
+  background-color: rgb(32, 44, 176);
+  border-radius: 25px;
+  font-size: 1.25rem;
+  border: 2px solid rgb(202, 208, 37);
+}
