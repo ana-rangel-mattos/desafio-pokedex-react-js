@@ -1,13 +1,15 @@
+@import "../index.css";
+
 .pokemonList {
   width: 40%;
   height: 100%;
   padding: 30px;
-  background-color: rgb(39, 80, 163);
+  background-color: var(--color-blue-4);
 
   display: flex;
   flex-direction: column;
   text-align: center;
-  border-right: 2px solid rgb(202, 208, 37);
+  border-right: 2px solid var(--color-yellow-1);
 }
 
 .list {
@@ -38,7 +40,7 @@
   position: relative;
   width: 25px;
   height: 25px;
-  background-color: rgb(202, 208, 37);
+  background-color: var(--color-yellow-1);
   border-radius: 12.5px;
   cursor: pointer;
 }
@@ -50,12 +52,12 @@
   left: 5px;
   width: 15px;
   height: 15px;
-  background-color: rgb(39, 80, 163);
+  background-color: var(--color-blue-4);
   border-radius: 7.5px;
 }
 
 .pokemonName {
-  color: rgb(202, 208, 37);
+  color: var(--color-yellow-1);
 }
 
 .pagination {

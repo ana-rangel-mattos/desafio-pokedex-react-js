@@ -1,0 +1,30 @@
+@import "../index.css";
+
+.searchInput {
+  min-width: 310px;
+  padding: 15px 20px;
+  border-radius: 28px;
+  outline: none;
+
+  font-size: 1rem;
+  font-weight: bold;
+  text-align: center;
+
+  color: var(--color-yellow-1);
+  background-color: var(--color-blue-3);
+  border: 3px solid var(--color-yellow-1);
+}
+
+.searchInput::placeholder {
+  color: var(--color-yellow-1);
+  font-size: 1rem;
+  text-align: center;
+}
+
+.toogleQueryType {
+  padding: 10px 15px;
+  border-radius: 25px;
+  background-color: var(--color-blue-3);
+  border: 3px solid var(--color-yellow-1);
+  font-size: 1.25rem;
+}

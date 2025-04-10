@@ -2,16 +2,24 @@ import { usePokemonContext } from "../Context/PokemonProvider";
 import Button from "./Button";
 import Loader from "./Loader";
 import styles from "./PokemonList.module.css";
+import Error from "./Error";
 
 function PokemonList() {
-  const { pokemons, dispatch, isLoading, previousPage, nextPage } =
-    usePokemonContext();
+  const {
+    pokemons,
+    dispatch,
+    isLoading,
+    previousPage,
+    nextPage,
+    errorPokemonList,
+  } = usePokemonContext();
   return (
     <section className={styles.pokemonList}>
       <h1>Lista de Pokémons</h1>
 
       <ul className={styles.list}>
         {isLoading && <Loader />}
+        {errorPokemonList && <Error error={errorPokemonList} />}
         {!isLoading &&
           pokemons.map((pokemon, index) => (
             <li className={styles.pokemon} key={`${pokemon}-${index}`}>

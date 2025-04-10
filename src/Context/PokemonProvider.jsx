@@ -13,6 +13,8 @@ const initialState = {
   nextPage: null,
   currentPage: "https://pokeapi.co/api/v2/pokemon/?offset=0&limit=20",
   previousPage: null,
+  errorDetails: null,
+  errorPokemonList: null,
 };
 
 function reducer(state, action) {
@@ -24,6 +26,18 @@ function reducer(state, action) {
       };
     case "changeQuery":
       return { ...state, query: action.payload };
+    case "searchPokemon": {
+      if (!state.query.length) return state;
+      return {
+        ...state,
+        pokemon: null,
+        query: "",
+        pokemonUrl: `https://pokeapi.co/api/v2/pokemon/${
+          state.queryType === "Number" ? Number(state.query) : state.query
+        }/`,
+        isLoadingDetails: true,
+      };
+    }
     case "dataReceived":
       return {
         ...state,
@@ -47,6 +61,20 @@ function reducer(state, action) {
         pokemonUrl: null,
         isLoadingDetails: false,
       };
+    case "errorFetchingDetails":
+      return {
+        ...state,
+        isLoadingDetails: false,
+        pokemon: null,
+        errorDetails: action.payload,
+      };
+    case "errorFetchingList":
+      return {
+        ...state,
+        isLoading: false,
+        pokemons: [],
+        errorPokemonList: action.payload,
+      };
     default:
       return state;
   }
@@ -65,6 +93,8 @@ export function PokemonProvider({ children }) {
       pokemon,
       pokemonUrl,
       isLoadingDetails,
+      errorDetails,
+      errorPokemonList,
     },
     dispatch,
   ] = useReducer(reducer, initialState);
@@ -83,7 +113,7 @@ export function PokemonProvider({ children }) {
           },
         });
       } catch (error) {
-        throw new Error(error.message);
+        dispatch({ type: "errorFetchingList", payload: error.message });
       }
     }
     handlePokemons();
@@ -97,7 +127,7 @@ export function PokemonProvider({ children }) {
         const data = await res.json();
         dispatch({ type: "showDetailsPokemon", payload: data });
       } catch (error) {
-        throw new Error(error.message);
+        dispatch({ type: "errorFetchingDetails", payload: error?.message });
       }
     }
     getDetailsPokemon();
@@ -114,6 +144,8 @@ export function PokemonProvider({ children }) {
     pokemonUrl,
     nextPage,
     previousPage,
+    errorDetails,
+    errorPokemonList,
   };
 
   return (

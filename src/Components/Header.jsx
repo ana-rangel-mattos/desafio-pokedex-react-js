@@ -1,8 +1,10 @@
+import Button from "./Button";
 import { usePokemonContext } from "../Context/PokemonProvider";
 import styles from "./Header.module.css";
+import SearchBar from "./SearchBar";
 
 function Header() {
-  const { queryType, dispatch } = usePokemonContext();
+  const { dispatch } = usePokemonContext();
   return (
     <header className={styles.header}>
       <img
@@ -10,23 +12,11 @@ function Header() {
         alt="Pokémon logo."
         className={styles.logo}
       />
-      <input
-        type={`${queryType === "Number" ? "number" : "text"}`}
-        onChange={(e) =>
-          dispatch({ type: "changeQuery", payload: e.target.value })
-        }
-        placeholder={`${
-          queryType === "Number"
-            ? "Pesquisar pokémon por número"
-            : "Pesquisar pokémon por nome"
-        }`}
-        className={styles.searchInput}
-      />
-      <div
-        className={styles.toogleQueryType}
-        onClick={() => dispatch({ type: "changeQueryType" })}
-      >
-        {queryType === "Number" ? "#️⃣ Por número" : "🔖 Por nome"}
+      <div className={styles.container}>
+        <SearchBar />
+        <Button onClick={() => dispatch({ type: "searchPokemon" })}>
+          Buscar
+        </Button>
       </div>
     </header>
   );

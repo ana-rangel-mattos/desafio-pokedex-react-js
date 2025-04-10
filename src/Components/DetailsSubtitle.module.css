@@ -1,6 +1,8 @@
+@import "../index.css";
+
 .subtitle {
   font-size: 1.5rem;
-  color: rgb(202, 208, 37);
-  text-decoration: underline rgb(18, 38, 78) 5px;
+  color: var(--color-yellow-1);
+  text-decoration: underline var(--color-blue-2) 5px;
   margin-bottom: 5px;
 }
