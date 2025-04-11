@@ -7,7 +7,9 @@ const initialState = {
   query: "",
   pokemons: [],
   pokemon: null,
+  pokemon2: null,
   pokemonUrl: null,
+  pokemonUrl2: null,
   isLoading: true,
   isLoadingDetails: false,
   nextPage: null,
@@ -47,18 +49,34 @@ function reducer(state, action) {
         isLoading: false,
       };
     case "getDetailsPokemon":
-      return { ...state, pokemonUrl: action.payload, isLoadingDetails: true };
+      return {
+        ...state,
+        pokemonUrl: action.payload,
+        isLoadingDetails: true,
+        pokemon: null,
+      };
     case "showDetailsPokemon":
-      return { ...state, pokemon: action.payload, isLoadingDetails: false };
+      return {
+        ...state,
+        pokemon: action.payload,
+        isLoadingDetails: false,
+        errorDetails: null,
+      };
     case "getNextPage":
-      return { ...state, currentPage: state.nextPage };
+      return { ...state, currentPage: state.nextPage, errorPokemonList: null };
     case "getPreviousPage":
-      return { ...state, currentPage: state.previousPage };
+      return {
+        ...state,
+        currentPage: state.previousPage,
+        errorPokemonList: null,
+      };
     case "closeDetails":
       return {
         ...state,
         pokemon: null,
         pokemonUrl: null,
+        pokemon2: null,
+        pokemonUrl2: null,
         isLoadingDetails: false,
       };
     case "errorFetchingDetails":
@@ -74,6 +92,15 @@ function reducer(state, action) {
         isLoading: false,
         pokemons: [],
         errorPokemonList: action.payload,
+      };
+    case "selectToCompare":
+      return { ...state, pokemonUrl2: action.payload, isLoadingDetails: true }; // Trigger a useEffect with pokemonUrl2 as dependecie.
+    case "comparePokemons":
+      return {
+        ...state,
+        pokemon2: action.payload,
+        isLoadingDetails: false,
+        errorDetails: null,
       };
     default:
       return state;
@@ -91,7 +118,9 @@ export function PokemonProvider({ children }) {
       currentPage,
       previousPage,
       pokemon,
+      pokemon2,
       pokemonUrl,
+      pokemonUrl2,
       isLoadingDetails,
       errorDetails,
       errorPokemonList,
@@ -133,6 +162,20 @@ export function PokemonProvider({ children }) {
     getDetailsPokemon();
   }, [pokemonUrl]);
 
+  useEffect(() => {
+    async function getDetailsPokemon() {
+      if (!pokemonUrl2) return;
+      try {
+        const res = await fetch(`${pokemonUrl2}`);
+        const data = await res.json();
+        dispatch({ type: "comparePokemons", payload: data });
+      } catch (error) {
+        dispatch({ type: "errorFetchingDetails", payload: error?.message });
+      }
+    }
+    getDetailsPokemon();
+  }, [pokemonUrl2]);
+
   const sharedStates = {
     query,
     queryType,
@@ -141,7 +184,9 @@ export function PokemonProvider({ children }) {
     isLoading,
     isLoadingDetails,
     pokemon,
+    pokemon2,
     pokemonUrl,
+    pokemonUrl2,
     nextPage,
     previousPage,
     errorDetails,

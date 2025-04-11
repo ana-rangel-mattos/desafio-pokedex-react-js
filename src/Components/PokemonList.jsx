@@ -6,6 +6,8 @@ import Error from "./Error";
 
 function PokemonList() {
   const {
+    pokemon: pokemon1,
+    pokemon2,
     pokemons,
     dispatch,
     isLoading,
@@ -23,19 +25,35 @@ function PokemonList() {
         {!isLoading &&
           pokemons.map((pokemon, index) => (
             <li className={styles.pokemon} key={`${pokemon}-${index}`}>
-              <div className={styles.selectPokemon}></div>
+              <div className={styles.bulletPoint}></div>
               <div className={styles.container}>
                 <p className={styles.pokemonName}>{pokemon.name}</p>
-                <Button
-                  onClick={() =>
-                    dispatch({
-                      type: "getDetailsPokemon",
-                      payload: pokemon.url,
-                    })
-                  }
-                >
-                  Ver mais
-                </Button>
+                <div className={styles.container2}>
+                  {pokemon1 && (
+                    <Button
+                      onClick={() =>
+                        dispatch({
+                          type: "selectToCompare",
+                          payload: pokemon.url,
+                        })
+                      }
+                    >
+                      Comparar
+                    </Button>
+                  )}
+                  {!pokemon2 && (
+                    <Button
+                      onClick={() =>
+                        dispatch({
+                          type: "getDetailsPokemon",
+                          payload: pokemon.url,
+                        })
+                      }
+                    >
+                      Ver mais
+                    </Button>
+                  )}
+                </div>
               </div>
             </li>
           ))}

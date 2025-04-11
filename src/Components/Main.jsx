@@ -4,14 +4,17 @@ import PokemonNotFound from "./PokemonNotFound";
 import { usePokemonContext } from "../Context/PokemonProvider";
 import styles from "./Main.module.css";
 import Loader from "./Loader";
+import ComparePokemons from "./ComparePokemons";
 
 function Main() {
-  const { pokemon, errorDetails, isLoadingDetails } = usePokemonContext();
+  const { pokemon, pokemon2, errorDetails, isLoadingDetails } =
+    usePokemonContext();
   return (
     <main className={styles.Main}>
       <PokemonList />
       {isLoadingDetails && <Loader />}
-      {pokemon && <PokemonDetails />}
+      {!pokemon2 && pokemon && <PokemonDetails />}
+      {pokemon && pokemon2 && <ComparePokemons />}
       {errorDetails && <PokemonNotFound />}
     </main>
   );

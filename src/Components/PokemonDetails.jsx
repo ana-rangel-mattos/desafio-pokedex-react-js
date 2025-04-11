@@ -2,6 +2,8 @@ import DetailsField from "./DetailsField";
 import { usePokemonContext } from "../Context/PokemonProvider";
 import styles from "./PokemonDetails.module.css";
 import DetailsSubtitle from "./DetailsSubtitle";
+import CloseButton from "./CloseButton";
+import PokemonImage from "./PokemonImage";
 
 function PokemonDetails() {
   const { pokemon, dispatch } = usePokemonContext();
@@ -15,15 +17,11 @@ function PokemonDetails() {
 
   return (
     <section className={styles.pokemonDetails}>
-      <button
-        className={styles.closeBtn}
-        onClick={() => dispatch({ type: "closeDetails" })}
-      >
+      <CloseButton onClick={() => dispatch({ type: "closeDetails" })}>
         &times;
-      </button>
+      </CloseButton>
       <h2 className={styles.title}>Detalhes sobre {pokemon["species"].name}</h2>
-      <img
-        className={styles.img}
+      <PokemonImage
         src={pokemon["sprites"].front_default}
         alt={`Imagem do ${pokemon["species"].name}`}
       />
@@ -55,7 +53,7 @@ function PokemonDetails() {
           </li>
         ))}
         <li>
-          <DetailsSubtitle>Soma das Estatísticas:</DetailsSubtitle> {sumStats}
+          <DetailsSubtitle>Soma dos Status:</DetailsSubtitle> {sumStats}
         </li>
       </ul>
     </section>

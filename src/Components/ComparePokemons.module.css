@@ -1,0 +1,59 @@
+@import "../index.css";
+
+.comparePokemons {
+  width: 60%;
+  height: 100%;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+
+  gap: 0.25rem;
+  font-size: 1.35rem;
+  font-weight: 500;
+}
+
+.title {
+  font-size: 3.2rem;
+  margin: 30px 0;
+}
+
+.img {
+  max-width: 96px;
+}
+
+.pokemon {
+  width: 70%;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 3rem;
+}
+
+.container {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.name1 {
+  text-transform: capitalize;
+  font-size: 3rem;
+  text-decoration: underline;
+  color: var(--color-yellow-1);
+}
+
+.name2 {
+  text-transform: capitalize;
+  font-size: 3rem;
+  text-decoration: underline;
+  color: var(--color-blue-2);
+}
+
+.versus {
+  width: 100%;
+  text-align: center;
+  font-size: 2.5rem;
+  position: relative;
+}

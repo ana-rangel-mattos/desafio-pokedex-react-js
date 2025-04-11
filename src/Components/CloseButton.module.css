@@ -1,0 +1,21 @@
+@import "../index.css";
+
+.closeBtn {
+  width: 30px;
+  height: 30px;
+  position: absolute;
+  left: 2rem;
+  top: 2rem;
+  cursor: pointer;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  font-size: 1.5rem;
+  color: var(--color-yellow-1);
+
+  border-radius: 15px;
+  border: 2px solid var(--color-yellow-1);
+  background-color: var(--color-blue-2);
+}
