@@ -2,7 +2,8 @@
 
 .comparePokemons {
   width: 60%;
-  height: 100%;
+  height: fit-content;
+  background-color: var(--color-blue-4);
 
   display: flex;
   flex-direction: column;
@@ -16,7 +17,8 @@
 
 .title {
   font-size: 3.2rem;
-  margin: 30px 0;
+  margin: 1.857rem 0;
+  text-align: center;
 }
 
 .img {
@@ -56,4 +58,25 @@
   text-align: center;
   font-size: 2.5rem;
   position: relative;
+}
+
+.result {
+  width: 90%;
+  text-align: center;
+}
+
+@media screen and (max-width: 901px) {
+  .comparePokemons {
+    width: 100%;
+    height: fit-content;
+    padding-bottom: 2rem;
+  }
+
+  .title {
+    margin-top: 4rem;
+  }
+
+  .result {
+    width: 85%;
+  }
 }

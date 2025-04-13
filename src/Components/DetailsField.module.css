@@ -8,3 +8,9 @@
 .fields > p {
   font-size: 1.25rem;
 }
+
+@media (max-width: 1519px) {
+  .fields {
+    width: 80%;
+  }
+}

@@ -3,7 +3,7 @@
 .pokemonList {
   width: 40%;
   height: 100%;
-  padding: 30px;
+  padding: 1.857rem;
   background-color: var(--color-blue-4);
 
   display: flex;
@@ -64,6 +64,7 @@
 }
 
 .pokemonName {
+  margin-left: 2rem;
   color: var(--color-yellow-1);
   text-transform: capitalize;
 }
@@ -72,4 +73,90 @@
   display: flex;
   margin-top: 30px;
   justify-content: space-evenly;
+}
+
+@media screen and (max-width: 508px) {
+  .pokemonList {
+    width: 100%;
+    height: fit-content;
+    border-right: 0;
+  }
+
+  .pokemon {
+    flex-direction: column;
+    margin-top: 2rem;
+  }
+
+  .pokemonName {
+    margin-left: 0;
+  }
+
+  .bulletPoint {
+    margin-left: 0;
+    align-self: self-start;
+    margin-left: 2rem;
+  }
+
+  .container {
+    flex-direction: column;
+    justify-content: start;
+    align-items: flex-start;
+    margin-left: 6rem;
+  }
+
+  .container2 {
+    flex-direction: column;
+    justify-content: start;
+    align-items: flex-start;
+  }
+}
+
+@media screen and (max-width: 901px) and (min-width: 509px) {
+  .pokemonList {
+    width: 100%;
+    height: fit-content;
+    border-right: 0;
+  }
+}
+
+@media screen and (max-width: 1223px) and (min-width: 902px) {
+  .pokemonList {
+    height: fit-content;
+    text-align: start;
+  }
+
+  .pokemon {
+    flex-direction: column;
+    margin-top: 2rem;
+  }
+
+  .pokemonName {
+    margin-left: 0;
+  }
+
+  .bulletPoint {
+    margin-left: 0;
+    align-self: self-start;
+    margin-left: 2rem;
+  }
+
+  .container {
+    flex-direction: column;
+    justify-content: start;
+    align-items: flex-start;
+    margin-left: 6rem;
+  }
+
+  .container2 {
+    flex-direction: column;
+    justify-content: start;
+    align-items: flex-start;
+  }
+}
+
+@media screen and (max-width: 1519px) and (min-width: 1224px) {
+  .pokemonList {
+    height: fit-content;
+    width: 50%;
+  }
 }

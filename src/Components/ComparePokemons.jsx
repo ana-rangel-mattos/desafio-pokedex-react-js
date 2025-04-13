@@ -53,7 +53,7 @@ function ComparePokemons() {
       </div>
 
       {sumStatsPokemon1 !== sumStatsPokemon2 ? (
-        <h3>
+        <h3 className={styles.result}>
           {sumStatsPokemon1 > sumStatsPokemon2
             ? pokemon["species"].name
             : pokemon2["species"].name}{" "}
@@ -64,7 +64,7 @@ function ComparePokemons() {
           pontos.
         </h3>
       ) : (
-        <h3>Houve um empate.</h3>
+        <h3 className={styles.result}>Houve um empate.</h3>
       )}
     </section>
   );

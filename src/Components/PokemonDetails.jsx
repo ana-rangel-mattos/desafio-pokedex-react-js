@@ -38,7 +38,9 @@ function PokemonDetails() {
       <DetailsField>
         <DetailsSubtitle>Habilidades:</DetailsSubtitle>
         {pokemon["abilities"].map((item, index) => (
-          <p key={`${item}${index}`}>{item["ability"].name}</p>
+          <p className={styles.abilities} key={`${item}${index}`}>
+            {item["ability"].name}
+          </p>
         ))}
       </DetailsField>
 

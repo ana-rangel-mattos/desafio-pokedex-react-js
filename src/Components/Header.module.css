@@ -20,3 +20,40 @@
 .logo {
   max-width: 250px;
 }
+
+@media screen and (max-width: 348px) {
+  .logo {
+    max-width: 200px;
+  }
+
+  .header {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .container {
+    row-gap: 1rem;
+    margin-top: 1rem;
+    flex-direction: column;
+  }
+}
+
+@media screen and (max-width: 1116px) and (min-width: 349px) {
+  .header {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .container {
+    row-gap: 1rem;
+    margin-top: 1rem;
+    flex-direction: column;
+  }
+}
+
+@media screen and (max-width: 1430px) and (min-width: 1117px) {
+  .container {
+    width: 80%;
+    margin-left: 3rem;
+  }
+}
